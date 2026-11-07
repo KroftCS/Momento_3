@@ -30,9 +30,7 @@ public class GestionEmpleados {
             System.out.println("6. Mostrar empleado con MENOR salario");
             System.out.println("7. Mostrar empleado con MAYOR salario");
             System.out.println("8. Salir");
-            System.out.println("Seleccione una opción: ");
-            opcion = leer.nextInt();
-            leer.nextLine();
+            opcion = leerEntero("Seleccione una opción:");
 
             switch (opcion) {
                 case 1:
@@ -66,11 +64,47 @@ public class GestionEmpleados {
         }   while (opcion !=8);
     }
 
+    public static int leerEntero(String mensaje){
+        int numero = 0;
+        boolean valido =false;
+
+        do { 
+            try {
+                System.out.print(mensaje);
+                numero = leer.nextInt();
+                leer.nextLine();
+                valido = true;
+            } catch (Exception e) {
+                System.out.println("Error: debe ingresar un numero entero");
+                leer.nextLine();
+            }
+        } while (!valido);
+
+        return numero;
+    }
+
+    public static double leerDecimal(String mensaje){
+        double numero = 0;
+        boolean valido = false;
+        
+        do {
+            try {
+                System.out.print(mensaje);
+                numero = leer.nextDouble();
+                leer.nextLine();
+                valido = true;
+            } catch (Exception e) {
+                System.out.println("Error: debe ingresar un valor numerico");
+                leer.nextLine();
+            }
+        }   while(!valido);
+
+        return numero;
+    }
+
         //Proceso para la opcion 1. Registrar Empleados
     public static void registrarEmpleados(){
-        System.out.println("Cuantos empleados desea registrar? ");
-        int cantidad = leer.nextInt();
-        leer.nextLine();
+        int cantidad = leerEntero("Cuantos Empleados desea registrar? ");
 
         if (cantidad <= 0) {
             System.out.println("La cantidad debe ser mayor que 0");     
@@ -85,10 +119,7 @@ public class GestionEmpleados {
                 nombres[n] = leer.nextLine().toUpperCase();
 
                 do {
-                    System.out.println("Salario: ");
-                    salarios[n] = leer.nextDouble();
-                    leer.nextLine();
-
+                    salarios[n] = leerDecimal("Salario: ");
                     if (salarios[n] <= 0){
                         System.out.println("El salario debe ser mayor que 0");
                     }
@@ -183,9 +214,7 @@ public class GestionEmpleados {
 
                 double nuevoSalario;
                 do { 
-                    System.out.println("Nuevo Salario: ");
-                    nuevoSalario = leer.nextDouble();
-                    leer.nextLine();
+                    nuevoSalario = leerDecimal("Nuevo Salario: ");
 
                     if (nuevoSalario <= 0){
                         System.out.println("El salario debe ser mayor que 0");
